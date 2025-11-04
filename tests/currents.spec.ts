@@ -30,7 +30,7 @@ test.describe("currents", async () => {
     await expect(maxCurrent).toHaveValue("16");
     await expect(maxCurrentSelected).toHaveText("16 A (11.0 kW) [default]");
     await expect(minCurrent).toHaveValue("6");
-    await expect(minCurrentSelected).toHaveText("6 A (4.1 kW) [default]");
+    await expect(minCurrentSelected).toHaveText("6.00 A (4.1 kW) [default]");
 
     // change min current
     await minCurrent.selectOption("0.125 A (0.1 kW)");
