@@ -47,7 +47,7 @@ const (
 	em2GoRegErrorCode       = 4   // Uint16 RO ENUM
 	em2GoRegCurrents        = 6   // Uint16 RO 0.1A
 	em2GoRegPower           = 12  // Uint32 RO 1W
-	em2GoRegEnergy          = 28  // Uint16 RO 0.1KWh
+	em2GoRegEnergy          = 28  // Uint32 RO 0.1KWh
 	em2GoRegMaxCurrent      = 32  // Uint16 RO 0.1A
 	em2GoRegMinCurrent      = 34  // Uint16 RO 0.1A
 	em2GoRegCableMaxCurrent = 36  // Uint16 RO 0.1A
@@ -285,7 +285,7 @@ var _ api.Meter = (*Em2Go)(nil)
 
 // CurrentPower implements the api.Meter interface
 func (wb *Em2Go) CurrentPower() (float64, error) {
-	b, err := wb.conn.ReadHoldingRegisters(em2GoRegPower, 2)
+	b, err := wb.conn.ReadHoldingRegisters(em2GoRegPower, 4)
 	if err != nil {
 		return 0, err
 	}
@@ -297,7 +297,7 @@ var _ api.MeterEnergy = (*Em2Go)(nil)
 
 // TotalEnergy implements the api.MeterEnergy interface
 func (wb *Em2Go) TotalEnergy() (float64, error) {
-	b, err := wb.conn.ReadHoldingRegisters(em2GoRegEnergy, 2)
+	b, err := wb.conn.ReadHoldingRegisters(em2GoRegEnergy, 4)
 	if err != nil {
 		return 0, err
 	}
